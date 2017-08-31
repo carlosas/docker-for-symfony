@@ -14,7 +14,7 @@
 * [Elasticsearch](https://www.elastic.co/products/elasticsearch)
 * [Logstash](https://www.elastic.co/products/logstash)
 * [Kibana](https://www.elastic.co/products/kibana)
-* [RabbitMQ](http://www.rabbitmq.com/)
+* [RabbitMQ](https://www.rabbitmq.com/)
 
 ## Previous requirements
 
@@ -92,7 +92,7 @@ Once all the containers are up, our services are available at:
 
 * Symfony app: [symfony.dev](http://symfony.dev)
 * Kibana: [symfony.dev:81](http://symfony.dev:81)
-* RabbitMQ: [symfony.dev:15672](https://symfony.dev:15672)
+* RabbitMQ: [symfony.dev:15672](http://symfony.dev:15672)
 * Log files location: *logs/nginx* and *logs/symfony*
 
 ---
