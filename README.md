@@ -14,7 +14,7 @@
 * [Elasticsearch](https://www.elastic.co/products/elasticsearch)
 * [Logstash](https://www.elastic.co/products/logstash)
 * [Kibana](https://www.elastic.co/products/kibana)
-* [RabbitMQ](https://www.rabbitmq.com/)
+* [RabbitMQ](http://www.rabbitmq.com/)
 
 ## Previous requirements
 
