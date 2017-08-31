@@ -14,6 +14,7 @@
 * [Elasticsearch](https://www.elastic.co/products/elasticsearch)
 * [Logstash](https://www.elastic.co/products/logstash)
 * [Kibana](https://www.elastic.co/products/kibana)
+* [RabbitMQ](https://www.rabbitmq.com/)
 
 ## Previous requirements
 
@@ -70,17 +71,19 @@ We have the following *docker-compose* built images:
 * `db`: The MySQL database container.
 * `elk`: Container which uses Logstash to collect logs, send them into Elasticsearch and visualize them with Kibana.
 * `redis`: The Redis server container.
+* `rabbitmq`: The RabbitMQ server/administration container.
 
 Running `docker-compose ps` should result in the following running containers:
 
 ```
            Name                          Command               State              Ports
 --------------------------------------------------------------------------------------------------
-dockers_db_1            /entrypoint.sh mysqld            Up      0.0.0.0:3306->3306/tcp
-dockers_elk_1           /usr/bin/supervisord -n -c ...   Up      0.0.0.0:81->80/tcp
-dockers_nginx_1         nginx                            Up      443/tcp, 0.0.0.0:80->80/tcp
-dockers_php_1           php-fpm                          Up      0.0.0.0:9000->9000/tcp
-dockers_redis_1         docker-entrypoint.sh redis ...   Up      6379/tcp
+container_mysql         /entrypoint.sh mysqld            Up      0.0.0.0:3306->3306/tcp
+container_elk           /usr/bin/supervisord -n -c ...   Up      0.0.0.0:81->80/tcp
+container_nginx         nginx                            Up      443/tcp, 0.0.0.0:80->80/tcp
+container_phpfpm        php-fpm                          Up      0.0.0.0:9000->9000/tcp
+container_redis         docker-entrypoint.sh redis ...   Up      6379/tcp
+container_rabbit        rabbitmq:3-management            Up      4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 15671/tcp, 25672/tcp, 0.0.0.0:15672->15672
 ```
 
 ## Usage
@@ -89,6 +92,7 @@ Once all the containers are up, our services are available at:
 
 * Symfony app: [symfony.dev](http://symfony.dev)
 * Kibana: [symfony.dev:81](http://symfony.dev:81)
+* RabbitMQ: [symfony.dev:15672](https://symfony.dev:15672)
 * Log files location: *logs/nginx* and *logs/symfony*
 
 ---
