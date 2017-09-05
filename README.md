@@ -92,7 +92,7 @@ Once all the containers are up, our services are available at:
 
 * Symfony app: [symfony.dev](http://symfony.dev)
 * Kibana: [symfony.dev:81](http://symfony.dev:81)
-* RabbitMQ: [symfony.dev:15672](https://symfony.dev:15672)
+* RabbitMQ: [symfony.dev:15672](http://symfony.dev:15672)
 * Log files location: *logs/nginx* and *logs/symfony*
 
 ---
