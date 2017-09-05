@@ -29,7 +29,10 @@ services:
             - redis
     nginx:
         container_name: container_nginx
-        build: nginx
+        build:
+            context: nginx
+            args:
+                MAX_EXECUTION_TIME: ${MAX_EXECUTION_TIME}
         ports:
             - 80:80
         volumes_from:
