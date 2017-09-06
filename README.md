@@ -1,4 +1,4 @@
-# Full Docker for Symfony 3
+# Complete Docker stack for Symfony 3
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](LICENSE)
 [![contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/carlosas/full-docker-for-symfony-3/issues)
@@ -35,14 +35,14 @@ This stack needs [docker](https://www.docker.com/) and [docker-compose](https://
     $ docker-compose up -d
     ```
 
-3. Update your system hosts file
+3. Update your system's hosts file
 
     ```sh
     # Get bridge IP address and update hosts file
     $ sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "symfony.dev" >> /etc/hosts
     ```
 
-4. Prepare your Symfony app
+4. Prepare the Symfony application
     1. Update Symfony parameters (*app/config/parameters.yml*)
 
         ```yml
