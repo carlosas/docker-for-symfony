@@ -22,7 +22,7 @@ This stack needs [docker](https://www.docker.com/) and [docker-compose](https://
 
 ## Installation
 
-1. Create a `.env` from the `.env.dist` file and adapt it according to your symfony application
+1. Create a `.env` from the `.env.dist` file and adapt it according to the needs of the application
 
     ```sh
     $ cp .env.dist .env && nano .env
