@@ -41,7 +41,7 @@ services:
             - ./logs/nginx/:/var/log/nginx
     elk:
         container_name: container_elk
-        image: carlosas/elk-5x
+        image: carlosas/elk
         ports:
             - 81:80
         volumes:
