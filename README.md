@@ -36,11 +36,13 @@ This stack needs [docker](https://www.docker.com/) and [docker-compose](https://
     $ docker-compose up -d
     ```
 
-3. Update your system's hosts file
+3. Update your system's hosts file (use only one of the commands)
 
     ```sh
     # Get bridge IP address and update hosts file
     $ sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "symfony.dev" >> /etc/hosts
+    # OR an alternative command
+    $ ifconfig docker0 | awk '/inet:/{ print substr($2,6); exit }'
     ```
 
 4. Prepare the Symfony application
