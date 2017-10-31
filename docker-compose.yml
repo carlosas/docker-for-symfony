@@ -11,13 +11,13 @@ services:
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_USER: ${MYSQL_USER}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-        expose:
-            - 3306:3306
+        ports:
+            - "3306:3306"
     redis:
         container_name: container_redis
         image: redis:alpine
-        expose:
-            - 6379:6379
+        ports:
+            - "6379:6379"
     php:
         container_name: container_phpfpm
         build:
@@ -36,7 +36,7 @@ services:
             args:
                 MAX_EXECUTION_TIME: ${MAX_EXECUTION_TIME}
         ports:
-            - 80:80
+            - "80:80"
         volumes_from:
             - php
         volumes:
@@ -45,7 +45,7 @@ services:
         container_name: container_elk
         image: carlosas/elk
         ports:
-            - 81:80
+            - "81:80"
         volumes:
             - ./elk/logstash:/etc/logstash
             - ./elk/logstash/patterns:/opt/logstash/patterns
