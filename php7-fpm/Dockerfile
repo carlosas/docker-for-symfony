@@ -32,4 +32,7 @@ RUN ln -s /root/.composer/vendor/bin/phpunit /usr/bin/phpunit
 # Create an alias for Symfony3 console
 RUN echo 'alias symfony="php bin/console"' >> ~/.bashrc
 
+# Prevent cache/logs/sessions permission problems
+RUN HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1) && setfacl -dR -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX /var/www/symfony/var && setfacl -R -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX /var/www/symfony/var
+
 WORKDIR /var/www/symfony
