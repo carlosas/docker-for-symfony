@@ -1,4 +1,4 @@
-FROM php:7-fpm
+FROM php:7.1-fpm
 ARG TIMEZONE
 
 RUN apt-get update && apt-get install -y git unzip openssl
@@ -13,6 +13,9 @@ RUN printf '[PHP]\ndate.timezone = "%s"\n', ${TIMEZONE} > /usr/local/etc/php/con
 
 # Install PDO extensions
 RUN docker-php-ext-install pdo pdo_mysql
+
+# Install Redis extension
+RUN pecl install -o -f redis && rm -rf /tmp/pear && docker-php-ext-enable redis
 
 # Install xdebug
 RUN pecl install xdebug
@@ -33,6 +36,6 @@ RUN ln -s /root/.composer/vendor/bin/phpunit /usr/bin/phpunit
 RUN echo 'alias symfony="php bin/console"' >> ~/.bashrc
 
 # Prevent cache/logs/sessions permission problems
-RUN HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1) && setfacl -dR -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX /var/www/symfony/var && setfacl -R -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX /var/www/symfony/var
+#RUN HTTPDUSER=$(ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]ginx' | grep -v root | head -1 | cut -d\  -f1) && setfacl -dR -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX /var/www/symfony/var && setfacl -R -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX /var/www/symfony/var
 
 WORKDIR /var/www/symfony
