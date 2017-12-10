@@ -1,4 +1,6 @@
-# Complete Docker stack for Symfony 3
+# Complete Docker stack for Symfony
+
+For a *simpler* version visit: [Docker-for-Symfony-Lite](https://github.com/carlosas/docker-for-symfony-lite)
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](LICENSE)
 [![contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](https://github.com/carlosas/docker-for-symfony/issues)
