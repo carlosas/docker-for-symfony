@@ -1,4 +1,4 @@
-# Complete Docker stack for Symfony
+# Docker stack for Symfony projects
 
 For a *simpler* version visit: [Docker-for-Symfony-Lite](https://github.com/carlosas/docker-for-symfony-lite)
 
