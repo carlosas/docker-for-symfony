@@ -48,13 +48,12 @@ This stack needs [docker](https://www.docker.com/) and [docker-compose](https://
     ```
 
 4. Prepare the Symfony application
-    1. Update Symfony parameters (*app/config/parameters.yml*)
+    1. Update Symfony env variables (*.env*)
 
-        ```yml
-        parameters:
-            database_host: db
-            #...
-            redis_host: redis
+        ```
+        #...
+        APP_REDIS_URL=redis://redis:6379
+        APP_REDIS_DEFAULT_LIFETIME=60
         ```
 
     2. Composer install & create database
