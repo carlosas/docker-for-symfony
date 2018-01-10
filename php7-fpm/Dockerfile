@@ -28,10 +28,6 @@ RUN echo "xdebug.remote_connect_back=1" >> /usr/local/etc/php/conf.d/docker-php-
 RUN echo "xdebug.idekey=\"PHPSTORM\"" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-# Install PHPUnit
-RUN composer global require "phpunit/phpunit"
-RUN ln -s /root/.composer/vendor/bin/phpunit /usr/bin/phpunit
-
 # Create an alias for Symfony3 console
 RUN echo 'alias symfony="php bin/console"' >> ~/.bashrc
 
