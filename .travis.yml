@@ -1,0 +1,23 @@
+sudo: required
+
+env:
+  DOCKER_COMPOSE_VERSION: 1.18.0
+
+services:
+  - docker
+
+before_install:
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - mkdir symfony
+  - cp .env.dist .env
+
+script:
+  - docker-compose build
+  - docker-compose up -d
+
+notifications:
+  email:
+    on_success: always
+    on_failure: always
