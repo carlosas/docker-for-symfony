@@ -17,8 +17,9 @@ before_install:
 script:
   - docker-compose build
   - docker-compose up -d
+  - docker-compose ps
 
 notifications:
   email:
-    on_success: always
+    on_success: never
     on_failure: always
