@@ -25,13 +25,13 @@ This stack needs [docker](https://www.docker.com/) and [docker-compose](https://
 
 ## Installation
 
-1. Create a `.env` from the `.env.dist` file and adapt it according to the needs of the application
+1. Create a `.env` from the `.env.dist` file and adapt it according to the application needs
 
     ```sh
     $ cp .env.dist .env && nano .env
     ```
 
-2. Build/run containers in detached mode (stop any system's ngixn/apache2 service)
+2. Build and run the stack in detached mode (stop any system's ngixn/apache2 service first)
 
     ```sh
     $ docker-compose build
