@@ -31,37 +31,37 @@ This stack needs [docker](https://www.docker.com/) and [docker-compose](https://
     $ cp .env.dist .env && nano .env
     ```
 
-2. Build/run containers in detached mode
+2. Build/run containers in detached mode (stop any system's ngixn/apache2 service)
 
     ```sh
     $ docker-compose build
     $ docker-compose up -d
     ```
 
-3. Update your system's hosts file (use only one of the commands)
+3. Get the bridge IP address
 
     ```sh
-    # Get bridge IP address and update hosts file
-    $ sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "symfony.dev" >> /etc/hosts
+    $ docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+'
     # OR an alternative command
     $ ifconfig docker0 | awk '/inet:/{ print substr($2,6); exit }'
     ```
 
-4. Prepare the Symfony application
+4. Update your system's hosts file with the IP retrieved in **step 3**
+
+5. Prepare the Symfony application
     1. Update Symfony env variables (*.env*)
 
         ```
         #...
-        APP_REDIS_URL=redis://redis:6379
-        APP_REDIS_DEFAULT_LIFETIME=60
+        DATABASE_URL=mysql://user:userpass@db:3306/mydb
+        #...
         ```
 
-    2. Composer install & create database
+    2. Composer install & update the schema from the container
 
         ```sh
         $ docker-compose exec php bash
         $ composer install
-        $ symfony doctrine:database:create
         $ symfony doctrine:schema:update --force
         ```
 5. (Optional) Xdebug: Configure your IDE to connect to port `9001` with key `PHPSTORM`
@@ -101,4 +101,4 @@ Once all the containers are up, our services are available at:
 
 ---
 
-:notebook: More information and useful stuff in the [wiki](https://github.com/carlosas/full-docker-for-symfony-3/wiki).
+:tada: Now we can stop our stack with `docker-compose down` and start it again with `docker-compose up -d`
