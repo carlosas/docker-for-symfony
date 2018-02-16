@@ -33,6 +33,12 @@ This stack needs [docker](https://www.docker.com/) and [docker-compose](https://
     $ cp .env.dist .env && nano .env
     ```
 
+1.b. Due to an Elasticsearch 6 requirement, we may need to set a host's sysctl option and restart ([More info](https://github.com/spujadas/elk-docker/issues/92)):
+
+   ```
+   sudo sysctl -w vm.max_map_count=262144
+   ```
+
 2. Build and run the stack in detached mode (stop any system's ngixn/apache2 service first)
 
     ```sh
@@ -85,19 +91,22 @@ Running `docker-compose ps` should result in the following running containers:
            Name                          Command               State              Ports
 --------------------------------------------------------------------------------------------------
 container_mysql         /entrypoint.sh mysqld            Up      0.0.0.0:3306->3306/tcp
-container_elk           /usr/bin/supervisord -n -c ...   Up      0.0.0.0:81->80/tcp
 container_nginx         nginx                            Up      443/tcp, 0.0.0.0:80->80/tcp
 container_phpfpm        php-fpm                          Up      0.0.0.0:9000->9000/tcp
 container_redis         docker-entrypoint.sh redis ...   Up      6379/tcp
 container_rabbit        rabbitmq:3-management            Up      4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 15671/tcp, 25672/tcp, 0.0.0.0:15672->15672
+container_elk           /usr/bin/supervisord -n -c ...   Up      0.0.0.0:5044->5044/tcp, 0.0.0.0:5601->5601/tcp, 0.0.0.0:9200->9200/tcp, 9300/tcp
 ```
 
 ## Usage
 
 Once all the containers are up, our services are available at:
 
-* Symfony app: [symfony.dev](http://symfony.dev)
-* Kibana: [symfony.dev:81](http://symfony.dev:81)
+* Symfony app: [symfony.dev:80](http://symfony.dev:80)
+* Mysql server: [symfony.dev:3306](symfony.dev:3306)
+* Redis: [symfony.dev:6379](http://symfony.dev:6379)
+* Elasticsearch: [symfony.dev:9200](http://symfony.dev:9200)
+* Kibana: [symfony.dev:5601](http://symfony.dev:5601)
 * RabbitMQ: [symfony.dev:15672](http://symfony.dev:15672)
 * Log files location: *logs/nginx* and *logs/symfony*
 

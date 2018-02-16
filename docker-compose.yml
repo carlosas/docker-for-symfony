@@ -1,25 +1,13 @@
 version: '2'
 
 services:
-    db:
-        container_name: container_mysql
-        image: mysql
-        volumes:
-            - "./.data/db:/var/lib/mysql"
-        environment:
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
-            MYSQL_USER: ${MYSQL_USER}
-            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-        ports:
-            - "3306:3306"
     redis:
         container_name: container_redis
         image: redis:alpine
         ports:
             - "6379:6379"
     php:
-        container_name: container_phpfpm
+        container_name: container_php
         build:
             context: php7-fpm
             args:
@@ -41,22 +29,18 @@ services:
             - php
         volumes:
             - ./logs/nginx/:/var/log/nginx
-    elk:
-        container_name: container_elk
-        image: carlosas/elk
-        ports:
-            - "81:80"
+    mysql:
+        container_name: container_mysql
+        image: mysql
         volumes:
-            - ./elk/logstash:/etc/logstash
-            - ./elk/logstash/patterns:/opt/logstash/patterns
-        volumes_from:
-            - php
-            - nginx
-    phpmyadmin:
-        container_name: container_phpmyadmin
-        image: phpmyadmin/phpmyadmin
+            - "./.data/mysql:/var/lib/mysql"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         ports:
-            - "8080:80"
+            - "3306:3306"
     rabbit:
         container_name: container_rabbit
         hostname: rabbit
@@ -64,6 +48,21 @@ services:
         environment:
             RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
             RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+        volumes:
+            - ./.data/rabbitmq/:/var/lib/rabbitmq
         ports:
             - "5672:5672"
             - "15672:15672"
+    elk:
+      container_name: container_elk
+      image: sebp/elk
+      volumes:
+          - ./elk/logstash:/etc/logstash
+          - ./elk/logstash/patterns:/opt/logstash/patterns
+      volumes_from:
+          - php
+          - nginx
+      ports:
+        - "5601:5601"
+        - "9200:9200"
+        - "5044:5044"
