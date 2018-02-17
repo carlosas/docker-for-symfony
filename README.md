@@ -33,20 +33,20 @@ This stack needs [docker](https://www.docker.com/) and [docker-compose](https://
     $ cp .env.dist .env && nano .env
     ```
 
-1.b. Due to an Elasticsearch 6 requirement, we may need to set a host's sysctl option and restart ([More info](https://github.com/spujadas/elk-docker/issues/92)):
+2.  Due to an Elasticsearch 6 requirement, we may need to set a host's sysctl option and restart ([More info](https://github.com/spujadas/elk-docker/issues/92)):
 
    ```
    sudo sysctl -w vm.max_map_count=262144
    ```
 
-2. Build and run the stack in detached mode (stop any system's ngixn/apache2 service first)
+3. Build and run the stack in detached mode (stop any system's ngixn/apache2 service first)
 
     ```sh
     $ docker-compose build
     $ docker-compose up -d
     ```
 
-3. Get the bridge IP address
+4. Get the bridge IP address
 
     ```sh
     $ docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+'
@@ -54,9 +54,9 @@ This stack needs [docker](https://www.docker.com/) and [docker-compose](https://
     $ ifconfig docker0 | awk '/inet:/{ print substr($2,6); exit }'
     ```
 
-4. Update your system's hosts file with the IP retrieved in **step 3**
+5. Update your system's hosts file with the IP retrieved in **step 3**
 
-5. Prepare the Symfony application
+6. Prepare the Symfony application
     1. Update Symfony env variables (*.env*)
 
         ```
@@ -72,7 +72,7 @@ This stack needs [docker](https://www.docker.com/) and [docker-compose](https://
         $ composer install
         $ symfony doctrine:schema:update --force
         ```
-5. (Optional) Xdebug: Configure your IDE to connect to port `9001` with key `PHPSTORM`
+7. (Optional) Xdebug: Configure your IDE to connect to port `9001` with key `PHPSTORM`
 
 ## How does it work?
 
@@ -80,7 +80,7 @@ We have the following *docker-compose* built images:
 
 * `nginx`: The Nginx webserver container in which the application volume is mounted.
 * `php`: The PHP-FPM container in which the application volume is mounted too.
-* `db`: The MySQL database container.
+* `mysql`: The MySQL database container.
 * `elk`: Container which uses Logstash to collect logs, send them into Elasticsearch and visualize them with Kibana.
 * `redis`: The Redis server container.
 * `rabbitmq`: The RabbitMQ server/administration container.
@@ -102,12 +102,12 @@ container_elk           /usr/bin/supervisord -n -c ...   Up      0.0.0.0:5044->5
 
 Once all the containers are up, our services are available at:
 
-* Symfony app: [symfony.dev:80](http://symfony.dev:80)
-* Mysql server: [symfony.dev:3306](symfony.dev:3306)
-* Redis: [symfony.dev:6379](http://symfony.dev:6379)
-* Elasticsearch: [symfony.dev:9200](http://symfony.dev:9200)
-* Kibana: [symfony.dev:5601](http://symfony.dev:5601)
-* RabbitMQ: [symfony.dev:15672](http://symfony.dev:15672)
+* Symfony app: `http://symfony.dev:80`
+* Mysql server: `symfony.dev:3306`
+* Redis: `symfony.dev:6379`
+* Elasticsearch: `symfony.dev:9200`
+* Kibana: `http://symfony.dev:5601`
+* RabbitMQ: `http://symfony.dev:15672`
 * Log files location: *logs/nginx* and *logs/symfony*
 
 ---
