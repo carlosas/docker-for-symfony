@@ -35,7 +35,7 @@ This stack needs [docker](https://www.docker.com/) and [docker-compose](https://
 
 2.  Due to an Elasticsearch 6 requirement, we may need to set a host's sysctl option and restart ([More info](https://github.com/spujadas/elk-docker/issues/92)):
 
-   ```
+   ```sh
    sudo sysctl -w vm.max_map_count=262144
    ```
 
