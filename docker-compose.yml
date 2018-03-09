@@ -59,6 +59,8 @@ services:
       volumes:
           - ./elk/logstash:/etc/logstash
           - ./elk/logstash/patterns:/opt/logstash/patterns
+          - ./.data/elasticsearch:/var/lib/elasticsearch
+#          - ./elk/elasticsearch:/etc/elasticsearch # to place elastisearch.yml configuration
       volumes_from:
           - php
           - nginx
