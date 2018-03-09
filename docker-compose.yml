@@ -23,6 +23,7 @@ services:
             context: nginx
             args:
                 MAX_EXECUTION_TIME: ${MAX_EXECUTION_TIME}
+                SERVER_NAME: ${SERVER_NAME}
         ports:
             - "80:80"
         volumes_from:
