@@ -1,7 +1,5 @@
 # Docker stack for Symfony projects
 
-For a *simpler* version visit: [Docker-for-Symfony-Lite](https://github.com/carlosas/docker-for-symfony-lite)
-
 [![Build Status](https://travis-ci.org/carlosas/docker-for-symfony.svg?branch=symfony-4&style=flat-square)](https://travis-ci.org/carlosas/docker-for-symfony)
 :octocat:
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](LICENSE)
