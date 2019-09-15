@@ -108,6 +108,8 @@ Once all the containers are up, our services are available at:
 * RabbitMQ: `http://symfony.dev:15672`
 * Log files location: *logs/nginx* and *logs/symfony*
 
+:tada: Now we can stop our stack with `docker-compose down` and start it again with `docker-compose up -d`
+
 ---
 
-:tada: Now we can stop our stack with `docker-compose down` and start it again with `docker-compose up -d`
+Software based on [eko/docker-symfony](https://github.com/eko/docker-symfony) and [maxpou/docker-symfony](https://github.com/maxpou/docker-symfony)
